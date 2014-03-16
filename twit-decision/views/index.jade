@@ -19,17 +19,17 @@ html
             input#choice2.choice(type='text', data-choice='2', placeholder='Choice #2...', name='choice2', data-bind='value: inputTwo')
             input#decision.btn.btn-success.btn-lg(type='submit', value='Submit' data-bind='enable: !hasResults()')
         .decision-container
-          p(class='alert alert-danger' data-bind='visible: error, text: error')
           div(class='progress progress-striped active' data-bind='visible: isProcessing()')
             div(class='progress-bar progress-bar-primary' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%')
               span(class='sr-only')
-          div(class='panel panel-lg panel-success' data-bind='visible: hasResults()')
+          div(class='panel panel-lg' data-bind='visible: shouldShowMessages, css: "panel-" + messageType()')
             div(class='panel-heading')
-              h3(class='panel-title') Decision Results
+              h3(class='panel-title' data-bind='text: messageTitle')
             div(class='panel-body')
               p(class='decision-text', data-bind='html: results')
+              p(class='text-danger', data-bind='text: error')
               div(class='text-center')
-                input#decision.btn.btn-success.btn-sm.text-center(type='button', value='Again?' data-bind='click: tryAgain')
+                input#decision.btn.btn-success.btn-sm.text-center(type='button', value='Again?' data-bind='visible: hasResults(), click: tryAgain')
 
     script(src='http://code.jquery.com/jquery-1.11.0.min.js')
     script(src='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
